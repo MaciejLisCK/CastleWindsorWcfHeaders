@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastleWindsorWcfHeaders.Client", "CastleWindsorWcfHeaders.Client\CastleWindsorWcfHeaders.Client.csproj", "{F244843E-B140-413C-B5AA-21E226E83EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastleWindsorWcfHeaders.Service", "CastleWindsorWcfHeaders.Service\CastleWindsorWcfHeaders.Service.csproj", "{C9444BFD-E5CB-4DC8-8AE7-6824DDECFF48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F244843E-B140-413C-B5AA-21E226E83EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F244843E-B140-413C-B5AA-21E226E83EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F244843E-B140-413C-B5AA-21E226E83EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F244843E-B140-413C-B5AA-21E226E83EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9444BFD-E5CB-4DC8-8AE7-6824DDECFF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9444BFD-E5CB-4DC8-8AE7-6824DDECFF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9444BFD-E5CB-4DC8-8AE7-6824DDECFF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9444BFD-E5CB-4DC8-8AE7-6824DDECFF48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B59CB5DA-A864-494E-853A-07DF3DF0163C}
+	EndGlobalSection
+EndGlobal

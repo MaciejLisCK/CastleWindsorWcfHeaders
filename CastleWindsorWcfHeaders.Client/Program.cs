@@ -1,8 +1,10 @@
-﻿using Castle.Facilities.WcfIntegration;
+using Castle.Facilities.WcfIntegration;
+using Castle.Facilities.WcfIntegration.Behaviors;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CastleWindsorWcfHeaders.Service;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -13,6 +15,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CastleWindsorWcfHeaders.Client
 {
@@ -25,12 +28,16 @@ namespace CastleWindsorWcfHeaders.Client
         {
             Container = new WindsorContainer();
             Container.AddFacility<WcfFacility>();
-            Container.Register(Component
-                .For<IService1>()
+            Container.Register(
+                Component.For<MessageLifecycleBehavior>(),
+                Component.For<IService1>()
                 .AsWcfClient(
                     WcfEndpoint.BoundTo(new BasicHttpBinding())
                     .At(ServiceUrl)
-                    .AddExtensions(new LangCodeHeaderBehavior())
+                    #region Select only one option
+                    //.AddExtensions(new AddLangCodeHeaderBehavior()) // Option 1
+                    .AddExtensions(new AddLangCodeHeader()) // Option 2
+                    #endregion
                 ));
 
             var service1 = Container.Resolve<IService1>();
@@ -42,7 +49,8 @@ namespace CastleWindsorWcfHeaders.Client
         }
     }
 
-    internal class LangCodeHeaderBehavior : IEndpointBehavior
+    #region Option 1. With Wcf behaviour
+    internal class AddLangCodeHeaderBehavior : IEndpointBehavior
     {
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters) { }
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) { }
@@ -66,4 +74,24 @@ namespace CastleWindsorWcfHeaders.Client
             return null;
         }
     }
+    #endregion
+
+    #region Option 2. With Castle AbstractMessageAction
+    public class AddLangCodeHeader : AbstractMessageAction
+    {
+        public AddLangCodeHeader()
+            : base(MessageLifecycle.OutgoingMessages)
+        {
+
+        }
+
+        public override bool Perform(ref Message message, MessageLifecycle lifecycle, IDictionary state)
+        {
+            MessageHeader header = MessageHeader.CreateHeader("LangCode", String.Empty, "PL");
+            message.Headers.Add(header);
+
+            return true;
+        }
+    }
+    #endregion
 }
